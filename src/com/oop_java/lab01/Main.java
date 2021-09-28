@@ -1,4 +1,4 @@
-package com.oop_java;
+package com.oop_java.lab01;
 
 
 public class Main {
