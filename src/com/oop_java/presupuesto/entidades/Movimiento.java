@@ -2,7 +2,7 @@ package com.oop_java.presupuesto.entidades;
 
 import java.util.Date;
 
-public class gasto {
+public class Movimiento {
 
     private String nombre;
     private String moneda;
@@ -11,7 +11,7 @@ public class gasto {
     private Date fecha;
 
     //creo el constructor para poder acceder a clase porque se encuentra en otro paquete
-    public gasto(String nombre,String moneda,String categoria,int monto){
+    public Movimiento(String nombre, String moneda, String categoria, int monto){
 
         this.nombre = nombre;
         this.moneda = moneda;
