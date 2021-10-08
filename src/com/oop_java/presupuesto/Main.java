@@ -1,9 +1,8 @@
 package com.oop_java.presupuesto;
 
-import com.oop_java.presupuesto.entidades.Gasto;
-import com.oop_java.presupuesto.entidades.Ingreso;
-import com.oop_java.presupuesto.entidades.Movimiento;
-import com.oop_java.presupuesto.entidades.RegistroMovimientos;
+import com.oop_java.presupuesto.logicaNegocio.ImplementacionRegistro;
+import com.oop_java.presupuesto.logicaNegocio.ImplementacionSuperDummy;
+import com.oop_java.presupuesto.logicaNegocio.InterfaceRegistro;
 
 import java.util.Scanner;
 
@@ -15,8 +14,17 @@ public class Main {
         Scanner consola = new Scanner(System.in);
 
         boolean siga =true;
-        //Aca se esta creando otro objeto de tipo lista y se le estan agregando valores
-        RegistroMovimientos registro = new RegistroMovimientos();
+
+
+        System.out.println("Que quiere usar? Fake? (F):");
+        InterfaceRegistro registo;
+        if (consola.nextLine().equals("F")) {
+            registo = new ImplementacionSuperDummy();
+        }else {
+            registo = new ImplementacionRegistro();
+        }
+
+
 
         while (siga) {
 
@@ -31,42 +39,36 @@ public class Main {
 
             System.out.println("Digite el monto de su Movimiento:");
             String montoStr = consola.nextLine();
-            int monto = Integer.parseInt(montoStr);
 
-
-            Movimiento nuevoMovimiento;
 
             System.out.println("Indique si es un Gasto (S)");
 
             if(consola.nextLine().equals("S")){
 
-                nuevoMovimiento = new Gasto(nombre,
+                registo.addGasto(nombre,
                         moneda,
                         categoria,
-                        monto);
+                        montoStr);
             }else{
 
                 System.out.println("Especifique la periocidad");
                 String periodicidad = consola.nextLine();
 
-                nuevoMovimiento= new Ingreso(nombre,
+                registo.addIngreso(nombre,
                         moneda,
                         categoria,
-                        monto,
+                        montoStr,
                         periodicidad);
             }
 
-            //Creando objetos
-           // Gasto nuevoGasto = new Gasto(nombre, moneda, categoria, monto);
-
-            //Daba error porque no estaba asignado en memoria por lo que se procede a agregar un valor al array
-            registro.addMovimientos(nuevoMovimiento);
 
             System.out.println("Todos los movientos:");
 
-            for (Movimiento movimientos : registro.getMovimientos()) {
-                System.out.println(movimientos.getNombre());
-            }
+            registo.getMovimientos();
+
+            System.out.println("Solo Gastos:");
+
+            registo.getGastos();
 
             System.out.println("Quiere seguir? (`S`)");
             siga = consola.nextLine().equals("S");
