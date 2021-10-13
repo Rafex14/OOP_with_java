@@ -7,7 +7,7 @@ import com.oop_java.presupuesto.entidades.Movimiento;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ImplementacionRegistro implements InterfaceRegistro {
+public class ImplementacionRegistro implements InterfaceRegistro, InterfaceReportes {
 
     List<Movimiento> movimientos;
 
@@ -21,16 +21,16 @@ public class ImplementacionRegistro implements InterfaceRegistro {
     //metodo 1
     public void getMovimientos() {
         for (Movimiento movimientos : movimientos) {
-            System.out.println(movimientos.getNombre());
+            System.out.println(movimientos.getDetails());
         }
     }
 
     //metodo 2
-    public void addIngreso(String nombre, String moneda, String categoria,String montoStr, String periodicidad){
+    public void addIngreso(String nombre, String moneda, String categoria, String montoStr, String periodicidad) {
 
-        if(!moneda.equals("USD")){
+        if (!moneda.equals("USD")) {
             System.out.println("Moneda no valida");
-        }else {
+        } else {
             int monto = Integer.parseInt(montoStr);
             this.movimientos.add(new Ingreso(nombre,
                     moneda,
@@ -53,9 +53,16 @@ public class ImplementacionRegistro implements InterfaceRegistro {
     public void getGastos() {
         for (Movimiento movimiento : this.movimientos) {
             if (movimiento instanceof Gasto) {
-                System.out.println(movimiento.getNombre());
+                System.out.println(movimiento.getDetails());
 
             }
+        }
+    }
+
+    @Override
+    public void imprimirReporte() {
+        for (Movimiento movimiento : this.movimientos) {
+            System.out.println(movimiento.getDetails());
         }
     }
 }

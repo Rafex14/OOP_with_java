@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Ingreso extends Movimiento {
 
-    public String periodicidad;
+    private String periodicidad;
 
     //creo el constructor para poder acceder a clase porque se encuentra en otro paquete
     public Ingreso(String nombre, String moneda, String categoria, int monto, String periodicidad) {
@@ -14,8 +14,11 @@ public class Ingreso extends Movimiento {
     }
 
     @Override
-    public String getNombre() {
-        return super.getNombre() + " " + this.periodicidad;
-
+    public String getDetails() {
+        return "INGRESO: " + this.getNombre() + " - " +
+                this.getMoneda() + " - " +
+                this.getCategoria() + " - " +
+                this.getMonto() + " - " +
+                this.periodicidad;
     }
 }
