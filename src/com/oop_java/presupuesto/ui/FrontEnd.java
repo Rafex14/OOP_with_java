@@ -1,7 +1,11 @@
 package com.oop_java.presupuesto.ui;
 
 import com.oop_java.presupuesto.logicaNegocio.ImplementacionRegistro;
+import com.oop_java.presupuesto.logicaNegocio.ImplementacionRegistroEnArchivo;
+import com.oop_java.presupuesto.logicaNegocio.ImplementacionSuperDummy;
 import com.oop_java.presupuesto.logicaNegocio.InterfaceRegistro;
+import com.oop_java.presupuesto.repo.FileRepository;
+import com.oop_java.presupuesto.repo.InterfaceRepository;
 
 
 import javax.swing.*;
@@ -19,6 +23,8 @@ public class FrontEnd extends JFrame {
     }
 
     public void build(){
+
+        InterfaceRegistro registo = new ImplementacionRegistroEnArchivo(new FileRepository());
 
         // Create Components
         JLabel lblNombre = new JLabel("Nombre");
@@ -41,8 +47,8 @@ public class FrontEnd extends JFrame {
 
         JButton salvar = new JButton("Salvar");
         JButton reporte = new JButton("Reporte");
-        InterfaceRegistro registo = new ImplementacionRegistro();
 
+        JLabel lblWarnings = new JLabel("");
 
         // ACTIONS
         ckIsIngreso.addActionListener(new AbstractAction() {
@@ -56,17 +62,27 @@ public class FrontEnd extends JFrame {
         salvar.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                boolean exitoso;
                 if (ckIsIngreso.isSelected()){
-                    registo.addIngreso(txtNombre.getText(),
+                    lblWarnings.setText("Salvando Ingreso");
+                    exitoso = registo.addIngreso(txtNombre.getText(),
                             txtMoneda.getText(),
                             txtCategoria.getText(),
                             txtMonto.getText(),
                             txtPeriodicidad.getText());
                 }else {
-                    registo.addGasto(txtNombre.getText(),
+                    lblWarnings.setText("Salvando Gasto");
+                    exitoso = registo.addGasto(txtNombre.getText(),
                             txtMoneda.getText(),
                             txtCategoria.getText(),
                             txtMonto.getText());
+                }
+                if (exitoso){
+                    txtNombre.setText("");
+                    txtMoneda.setText("");
+                    txtCategoria.setText("");
+                    txtMonto.setText("");
+                    txtPeriodicidad.setText("");
                 }
             }
         });

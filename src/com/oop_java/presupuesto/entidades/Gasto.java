@@ -4,6 +4,8 @@ import java.util.Date;
 
 public class Gasto extends Movimiento{
 
+    public Gasto(){}
+
     //creo el constructor para poder acceder a clase porque se encuentra en otro paquete
     public Gasto(String nombre, String moneda, String categoria, int monto){
 

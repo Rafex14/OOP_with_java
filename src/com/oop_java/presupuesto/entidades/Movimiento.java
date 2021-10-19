@@ -10,6 +10,7 @@ public abstract class Movimiento {
     private int monto;
     private Date fecha;
 
+    public Movimiento(){}
     //creo el constructor para poder acceder a clase porque se encuentra en otro paquete
     public Movimiento(String nombre, String moneda, String categoria, int monto) {
 

@@ -4,7 +4,11 @@ import java.util.Date;
 
 public class Ingreso extends Movimiento {
 
+
+
     private String periodicidad;
+
+    public Ingreso(){}
 
     //creo el constructor para poder acceder a clase porque se encuentra en otro paquete
     public Ingreso(String nombre, String moneda, String categoria, int monto, String periodicidad) {
