@@ -4,8 +4,6 @@ import java.util.Date;
 
 public class Ingreso extends Movimiento {
 
-
-
     private String periodicidad;
 
     public Ingreso(){}
