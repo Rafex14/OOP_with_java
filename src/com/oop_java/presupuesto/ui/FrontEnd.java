@@ -1,9 +1,10 @@
 package com.oop_java.presupuesto.ui;
 
+import com.oop_java.presupuesto.logicaNegocio.FormatoInvalido;
 import com.oop_java.presupuesto.logicaNegocio.ImplementacionRegistro;
 import com.oop_java.presupuesto.logicaNegocio.InterfaceRegistro;
 import com.oop_java.presupuesto.repo.FileRepository;
-
+import com.oop_java.presupuesto.repo.ErrorMuyPocaData;
 
 import javax.swing.*;
 import java.awt.*;
@@ -60,26 +61,30 @@ public class FrontEnd extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 boolean exitoso;
-                if (ckIsIngreso.isSelected()){
-                    lblWarnings.setText("Salvando Ingreso");
-                    exitoso = registo.addIngreso(txtNombre.getText(),
-                            txtMoneda.getText(),
-                            txtCategoria.getText(),
-                            txtMonto.getText(),
-                            txtPeriodicidad.getText());
-                }else {
-                    lblWarnings.setText("Salvando Gasto");
-                    exitoso = registo.addGasto(txtNombre.getText(),
-                            txtMoneda.getText(),
-                            txtCategoria.getText(),
-                            txtMonto.getText());
-                }
-                if (exitoso){
-                    txtNombre.setText("");
-                    txtMoneda.setText("");
-                    txtCategoria.setText("");
-                    txtMonto.setText("");
-                    txtPeriodicidad.setText("");
+                try {
+                    if (ckIsIngreso.isSelected()) {
+                        lblWarnings.setText("Salvando Ingreso");
+                        exitoso = registo.addIngreso(txtNombre.getText(),
+                                txtMoneda.getText(),
+                                txtCategoria.getText(),
+                                txtMonto.getText(),
+                                txtPeriodicidad.getText());
+                    } else {
+                        lblWarnings.setText("Salvando Gasto");
+                        exitoso = registo.addGasto(txtNombre.getText(),
+                                txtMoneda.getText(),
+                                txtCategoria.getText(),
+                                txtMonto.getText());
+                    }
+                    if (exitoso) {
+                        txtNombre.setText("");
+                        txtMoneda.setText("");
+                        txtCategoria.setText("");
+                        txtMonto.setText("");
+                        txtPeriodicidad.setText("");
+                    }
+                }catch (FormatoInvalido | ErrorMuyPocaData error){
+                    JOptionPane.showMessageDialog(null, error.getMessage());
                 }
             }
         });
