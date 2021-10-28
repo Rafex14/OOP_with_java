@@ -6,10 +6,11 @@ import com.oop_java.presupuesto.entidades.Movimiento;
 import com.oop_java.presupuesto.repo.ErrorMuyPocaData;
 import com.oop_java.presupuesto.repo.InterfaceRepository;
 
-import java.text.Normalizer;
+
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ImplementacionRegistro implements InterfaceRegistro {
     private InterfaceRepository repository;
@@ -52,14 +53,5 @@ public class ImplementacionRegistro implements InterfaceRegistro {
                 categoria,
                 monto);
         return this.repository.save(gasto.getDetails());
-    }
-
-    @Override
-    public void getMovimientos() {
-        this.repository.read();
-    }
-
-    public void getGastos() {
-        this.repository.read();
     }
 }

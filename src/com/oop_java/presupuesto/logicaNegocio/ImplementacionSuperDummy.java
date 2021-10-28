@@ -1,10 +1,12 @@
 package com.oop_java.presupuesto.logicaNegocio;
 
+import java.util.List;
 
 public class ImplementacionSuperDummy implements InterfaceRegistro, InterfaceReportes {
     @Override
-    public void getMovimientos() {
+    public List<String> getMovimientos() {
         System.out.println("No haga nada");
+        return null;
     }
 
     @Override
@@ -22,8 +24,4 @@ public class ImplementacionSuperDummy implements InterfaceRegistro, InterfaceRep
         System.out.println("No haga nada");
     }
 
-    @Override
-    public void imprimirReporte() {
-        System.out.println("No haga nada");
-    }
 }

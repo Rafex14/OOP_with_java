@@ -1,6 +1,7 @@
 package com.oop_java.presupuesto;
 
-
+import com.oop_java.presupuesto.logicaNegocio.ImplementacionRegistro;
+import com.oop_java.presupuesto.repo.InMemoryRepository;
 import com.oop_java.presupuesto.ui.FrontEnd;
 
 public class Main {
